@@ -1,6 +1,7 @@
-const user = require('../models/user');
-const user = require('../models/user');
 const User = require('../models/user');
+const SECRET_KEY = process.env.SECRET_KEY;
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 
 //callback pour ajouter un utilisateur avec id
@@ -34,8 +35,8 @@ exports.add = async (req, res, next) => {
     });
 
     try {
-        let user = await User.create(temp);
-
+        const user = new User(req.body);
+        await user.save();
         return res.status(201).json(user);
     } catch (error) {
         return res.status(501).json(error);
@@ -89,3 +90,42 @@ exports.delete = async (req, res, next) => {
         return res.status(501).json(error);
     }
 };
+
+//callback pour authentifier un utilisateur
+exports.authenticate = async (req, res, next) => {
+    const { email, password } = req.body;
+
+    try {
+        let user = await User.findOne({ email: email }, '-__v -createdAt -updatedAt');
+
+        if (user) {
+            bcrypt.compare(password, user.password, function(err, responce) {
+                if (err) {
+                    throw new Error(err);
+                }
+                if (responce) {
+                    delete user._doc.password;
+
+                    const expireIn = 60 * 60 * 24;
+                    const token = jwt.sign({
+                        user: user
+                    },
+                    SECRET_KEY,
+                    {
+                        expiresIn: expireIn
+                    });
+
+                    res.header('Authorization', 'Bearer' + token);
+
+                    return res.status(200).json('authenticate_suceed');
+                }
+
+                return res.status(403).json('wrong_credentials');
+            });
+        } else {
+            return res.status(404).json('user_not_found');
+        }
+    } catch (error) {
+        return res.status(501).json(error);
+    }
+}
