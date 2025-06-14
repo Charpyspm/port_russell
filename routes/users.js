@@ -3,13 +3,15 @@ var router = express.Router();
 
 const service = require('../services/users');
 
-router.get('/:id', service.getById);
+const private = require('../middlewares/private');
+
+router.get('/:id', private.checkJWT, service.getById);
 
 router.post('/add', service.add);
 
-router.patch('/:id', service.update);
+router.patch('/:id', private.checkJWT, service.update);
 
-router.delete('/:id', service.delete);
+router.delete('/:id', private.checkJWT, service.delete);
 
 // ajout de la route /authenticate
 router.post('/authenticate', service.authenticate);
