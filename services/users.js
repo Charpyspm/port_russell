@@ -35,11 +35,13 @@ exports.add = async (req, res, next) => {
     });
 
     try {
-        const user = new User(req.body);
+        const { username, email, password} = req.body;
+        const hash = await bcrypt.hash(password, 10);
+        const user = new User({ username, email, password: hash });
         await user.save();
-        return res.status(201).json(user);
+        return res.status(201).json({ message: 'User created'});
     } catch (error) {
-        return res.status(501).json(error);
+        return res.status(501).json({ error: error.message});
     }
 };
 

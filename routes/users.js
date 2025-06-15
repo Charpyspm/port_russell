@@ -16,6 +16,8 @@ router.delete('/:id', private.checkJWT, service.delete);
 // ajout de la route /authenticate
 router.post('/authenticate', service.authenticate);
 
+router.post('/add', service.add);
+
 module.exports = router;
 
 
