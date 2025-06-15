@@ -117,7 +117,7 @@ exports.authenticate = async (req, res, next) => {
 
                     res.header('Authorization', 'Bearer' + token);
 
-                    return res.status(200).json('authenticate_suceed');
+                    return res.status(200).json({token});
                 }
 
                 return res.status(403).json('wrong_credentials');
