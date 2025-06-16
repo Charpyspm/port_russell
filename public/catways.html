@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserver</title>
+</head>
+<body>
+    <header>
+        <h2>Dashboard</h2>
+        <nav>
+            <ul>
+                <li>
+                    <a href="../">Retour</a>
+                </li>
+                <li>
+                    <a href="">Documentation</a>
+                </li>
+                <li>
+                    <a href="/public/catways.html">Réserver un catway</a>
+                </li>
+                <li>
+                    <a href="#" id="logout">Se deconnecter</a>
+                </li> 
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <hr>
+        <h2>Liste des catways</h2>
+        <table id="catways-table" border="1">
+            <thead>
+                <tr>
+                    <th>Numéro</th>
+                    <th>Type</th>
+                    <th>État</th>
+                </tr>
+            </thead>
+            <tbody>
+    
+            </tbody>
+        </table>
+
+        <h3>Ajouter un catway</h3>
+            <form id="addCatwayForm">
+                <label>Type :
+                    <select name="catwayType" required>
+                        <option value="short">short</option>
+                        <option value="long">long</option>
+                    </select>
+                </label>
+                <label>État :
+                    <input type="text" name="catwayState" required>
+                </label>
+                <button type="submit">Ajouter</button>
+            </form>
+            <div id="catway-result"></div>
+
+        <h3>Modifier un catway</h3>
+            <form id="editCatwayForm">
+                <label>Numéro :
+                    <select name="catwayNumber" id="catwayNumberSelect" required>
+                        
+                    </select>
+                </label>
+                <label>État :
+                    <input type="text" name="catwayState" required>
+                </label>
+                <button type="submit">Modifier</button>
+            </form>
+            <div id="edit-result"></div>
+
+        <h3>Supprimer un catway</h3>
+<form id="deleteCatwayForm">
+  <label>Numéro à supprimer :
+    <select name="catwayNumber" id="deleteCatwayNumberSelect" required>
+      
+    </select>
+  </label>
+  <button type="submit">Supprimer</button>
+</form>
+<div id="deleteCatwayResult"></div>
+    </main>
+    <script src="/catways.js"></script>
+</body>
+</html>

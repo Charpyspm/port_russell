@@ -5,20 +5,30 @@ const service = require('../services/users');
 
 const private = require('../middlewares/private');
 
+router.get('/me', private.checkJWT, async (req, res) => {
+  console.log('decoded', req.decoded);
+  const user = req.decoded && req.decoded.user;
+  if (user) {
+    res.json({ _id: user._id, username: user.username, email: user.email });
+  } else {
+    res.status(404).json({ error: 'User not found' });
+  }
+});
+
 router.get('/:id', private.checkJWT, service.getById);
 
 router.post('/add', service.add);
 
 router.patch('/:id', private.checkJWT, service.update);
 
-router.delete('/:id', private.checkJWT, service.delete);
+router.delete('/me', private.checkJWT, service.deleteMe);
 
-// ajout de la route /authenticate
-router.post('/authenticate', service.authenticate);
+router.post('/login', service.authenticate);
 
-router.post('/add', service.add);
+router.get('/logout', (req, res) => {
+  res.clearCookie('token');
+  res.json({ message : ' disconnected'});
+});
+
 
 module.exports = router;
-
-
-// to do : mettre en place la fonction de login

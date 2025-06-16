@@ -31,15 +31,7 @@ const user = new Schema({
     
     });
 
-user.pre('save', function(next) {
-    if (!this.isModified('password')) {
-        return next();
-    }
 
-    this.password = bcrypt.hashSync(this.password, 10);
-
-    next();
-});
 
 module.exports = mongoose.model('User', user);
 

@@ -10,3 +10,13 @@ a {
 .center {
   text-align: center !important;
 }
+
+.user-card {
+  display:none; 
+  border:1px solid #ccc; 
+  border-radius:8px; 
+  padding:20px; 
+  max-width:350px; 
+  margin:20px auto; 
+  text-align:center;
+}

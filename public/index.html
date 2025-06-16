@@ -1,19 +1,56 @@
 <html>
 
-<head lang="fr">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Port Russell</title>
-  <link rel="stylesheet" href="./stylesheets/style.css">
-</head>
+  <head lang="fr">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Port Russell</title>
+    <link rel="stylesheet" href="./stylesheets/style.css">
+  </head>
 
-<body>
-  <h1 class="center">Port Russell</h1>
-  <p class="center">Bienvenue sur le site de reservation</p>
+  <body>
+    <!--<h1 class="center">Port Russell</h1>
+    <p class="center">Bienvenue sur le site de reservation</p>
+    <p></p>
 
-  <div class="center">
-    <a href="./login.html" class="button">Se connecter</a>
-    <a href="/register.html" class="button">S'inscrire</a>
-</body>
+    <div class="center">
+      <a href="./login.html" class="button">Se connecter</a>
+      <a href="/register.html" class="button">S'inscrire</a>
+    </div>
+
+    <div id="user-card" class="user-card">
+      <h2 id="user-username"></h2>
+      <a href="/edit.html" id="edit-link">Modifier mes informations</a>
+      <br><br>
+      <button id="delete-profile" style="background:#e74c3c; color:#fff; border:none; padding:10px 20px; border-radius:4px; cursor:pointer;">
+        Supprimer mon profil
+      </button>
+
+      
+    </div>
+    <script src="userCard.js"></script>-->
+    <h1 class="center">Port Russell</h1>
+    <p class="center">Bienvenue au Port de Plaisance ! 
+      <br> Profitez d’un emplacement idéal pour votre bateau et réservez facilement votre catway en ligne. 
+      <br> Notre port vous accueille toute l’année dans un cadre sécurisé et convivial, avec des services adaptés à tous les plaisanciers. 
+      <br> Naviguez l’esprit tranquille, votre place vous attend !</p>
+
+    <div class="center">
+      <form id="loginForm" class="center">
+        <fieldset>
+          <legend>Connexion</legend>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        
+            <label for="password">Mot de passe:</label>
+            <input type="password" id="password" name="password" autocomplete="current-password" required>
+        
+            <button type="submit">Se connecter</button>
+        </fieldset>
+    </form>
+        <div id="result"></div>
+        <script src="/login.js"></script>
+    </div>
+  </body>
+
 
 </html>

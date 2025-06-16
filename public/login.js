@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     e.preventDefault();
     const email = this.email.value;
     const password = this.password.value;
-    const res = await fetch('/users/authenticate', {
+    const res = await fetch('/login', {
       method: 'POST',
       headers: {'Content-type': 'application/json'},
       body: JSON.stringify({email, password})
@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (data.token) {
       document.getElementById('result').innerText = 'Login successful! Token: ' + data.token;
       localStorage.setItem('token', data.token);
+      window.location.href = '/dashboard.html';
     } else {
       document.getElementById('result').innerText = 'login failed:' +data.message;
     }
