@@ -23,7 +23,28 @@ document.addEventListener('DOMContentLoaded', async function() {
   }
 });
 
+// envoie vers la page edit.html
+document.getElementById('edit-profile-btn').onclick = function() {
+  window.location.href = 'edit.html';
+};
 
+// Supression de l'utilisateur
+document.getElementById('delete-profile-btn').onclick = async function() {
+  if (confirm('Supprimer votre profil ? Cette action est irréversible.')) {
+    const token = localStorage.getItem('token');
+    const res = await fetch('/users/me', {
+      method: 'DELETE',
+      headers: { 'Authorization': 'Bearer ' + token }
+    });
+    if (res.ok) {
+      alert('Profil supprimé');
+      localStorage.removeItem('token');
+      window.location.href = '/';
+    } else {
+      alert('Erreur lors de la suppression');
+    }
+  }
+};
 
 document.addEventListener('DOMContentLoaded', async function() {
   const token = localStorage.getItem('token');

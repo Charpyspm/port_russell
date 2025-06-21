@@ -6,7 +6,29 @@
     <title>Register port Russell</title>
 </head>
 <body>
-    <h1 class="center">S'inscrire</h1>
+    <header>
+        <h2>Dashboard</h2>
+        <nav>
+            <ul>
+                <li>
+                    <a href="#" onclick="history.back(); return false;">Retour</a>
+                </li>
+                <li>
+                    <a href="../openapi.yaml" target="_blank">Documentation</a>
+                </li>
+                <li>
+                    <a href="/catways.html">Réserver un catway</a>
+                </li>
+                <li>
+                    <a href="#" id="logout">Se deconnecter</a>
+                </li> 
+                <li>
+                    <a href="/register.html">Créer un nouvel utilisateur</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <h1 class="center">Nouvel utilisateur</h1>
     <form id="registerForm" class="center">
         <label for="username">Nom d'utilisateur:</label>
         <input type="text" id="username" name="username" required>
