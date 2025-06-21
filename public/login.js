@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     e.preventDefault();
     const email = this.email.value;
     const password = this.password.value;
-    const res = await fetch('/login', {
+    const res = await fetch('/users/login', {
       method: 'POST',
       headers: {'Content-type': 'application/json'},
       body: JSON.stringify({email, password})
