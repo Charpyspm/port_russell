@@ -11,10 +11,10 @@
         <nav>
             <ul>
                 <li>
-                    <a href="../">Retour</a>
+                    <a href="#" onclick="history.back(); return false;">Retour</a>
                 </li>
                 <li>
-                    <a href="">Documentation</a>
+                    <a href="../openapi.yaml" target="_blank">Documentation</a>
                 </li>
                 <li>
                     <a href="/catways.html">Réserver un catway</a>
@@ -22,6 +22,9 @@
                 <li>
                     <a href="#" id="logout">Se deconnecter</a>
                 </li> 
+                <li>
+                    <a href="/register.html">Créer un nouvel utilisateur</a>
+                </li>
             </ul>
         </nav>
     </header>
@@ -30,6 +33,13 @@
         <h2>Mon profil</h2>
         <p>Nom d'utilisateur : <span id="profile-username"></span></p>
         <p>Email : <span id="profile-email"></span></p>
+        <p>
+            <button id="edit-profile-btn">Modifier</button>
+            <button id="delete-profile-btn">Supprimer</button>
+        </p>
+        
+  
+        </div>
         <hr>
         <p>Date du jour : <span id="profile-date"></span></p>
         <hr>
