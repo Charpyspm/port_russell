@@ -71,15 +71,41 @@
             <div id="edit-result"></div>
 
         <h3>Supprimer un catway</h3>
-<form id="deleteCatwayForm">
-  <label>Numéro à supprimer :
-    <select name="catwayNumber" id="deleteCatwayNumberSelect" required>
-      
-    </select>
-  </label>
-  <button type="submit">Supprimer</button>
-</form>
-<div id="deleteCatwayResult"></div>
+        <form id="deleteCatwayForm">
+        <label>Numéro à supprimer :
+            <select name="catwayNumber" id="deleteCatwayNumberSelect" required>
+            
+            </select>
+        </label>
+        <button type="submit">Supprimer</button>
+        </form>
+        <div id="deleteCatwayResult"></div>
+
+        <h3>Réserver un catway</h3>
+        <form id="reservationForm">
+        <label>Numéro du catway :
+            <select name="catwayNumber" id="reservationCatwayNumber" required>
+            
+            </select>
+        </label>
+        <label>Date de début :
+            <input type="date" name="startDate" id="startDate" required>
+        </label>
+        <label>Date de fin :
+            <input type="date" name="endDate" id="endDate" required>
+        </label>
+        <label>Nom du bateau :
+            <input type="text" name="boatName" required>
+        </label>
+        <label>Nom et prénom :
+            <input type="text" name="fullName" required>
+        </label>
+        <button type="submit">Réserver</button>
+        </form>
+        <div id="reservationResult"></div>
+
+        
+        
     </main>
     <script src="/catways.js"></script>
 </body>

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+
 const catwaySchema = new mongoose.Schema({
   catwayNumber: Number,
   catwayType: String,

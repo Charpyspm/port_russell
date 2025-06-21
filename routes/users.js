@@ -1,9 +1,7 @@
 var express = require('express');
-var router = express.Router();
-
 const service = require('../services/users');
-
 const private = require('../middlewares/private');
+var router = express.Router();
 
 router.get('/me', private.checkJWT, async (req, res) => {
   console.log('decoded', req.decoded);

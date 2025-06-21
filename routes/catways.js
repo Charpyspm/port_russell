@@ -1,9 +1,12 @@
 const express = require('express');
+const private = require('../middlewares/private');
 const router = express.Router();
 const Catway = require('../models/catway');
+const Reservation = require('../models/reservation');
+
 
 router.get('/', async (req, res) => {
-  const catways = await Catway.find({});
+  const catways = await Catway.find({}).sort({ catwayNumber: 1 });
   res.json(catways);
 });
 
@@ -50,6 +53,37 @@ router.delete('/:catwayNumber', async (req, res) => {
       return res.status(404).json({ error: 'Catway non trouvé' });
     }
     res.json({ message: 'Catway supprimé' });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+router.post('/reserve', private.checkJWT, async (req, res) => {
+  try {
+    const { catwayNumber, startDate, endDate, boatName, fullName } = req.body;
+    const userId = req.decoded.user._id;
+
+    
+    const conflit = await Reservation.findOne({
+      catwayNumber,
+      $or: [
+        { startDate: { $lte: endDate }, endDate: { $gte: startDate } }
+      ]
+    });
+    if (conflit) {
+      return res.status(400).json({ error: "Ce catway est déjà réservé sur cette période." });
+    }
+
+    const reservation = new Reservation({
+      catwayNumber,
+      startDate,
+      endDate,
+      boatName,
+      fullName,
+      user: userId
+    });
+    await reservation.save();
+    res.status(201).json(reservation);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
