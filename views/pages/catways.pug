@@ -1,0 +1,60 @@
+extends ../layout
+
+block content
+  header
+    h2 Dashboard
+    nav
+      ul
+        li: a(href="#", onclick="history.back(); return false;") Retour
+        li: a(href="../openapi.yaml", target="_blank") Documentation
+        li: a(href="/catways") Réserver un catway
+        li: a(href="#", id="logout") Se deconnecter
+  main
+    hr
+    h2 Liste des catways
+    table#catways-table(border="1")
+      thead
+        tr
+          th Numéro
+          th Type
+          th État
+      tbody
+    h3 Ajouter un catway
+    form#addCatwayForm
+      label Type :
+        select(name="catwayType" required)
+          option(value="short") short
+          option(value="long") long
+      label État :
+        input(type="text" name="catwayState" required)
+      button(type="submit") Ajouter
+    #catway-result
+    h3 Modifier un catway
+    form#editCatwayForm
+      label Numéro :
+        select(name="catwayNumber" id="catwayNumberSelect" required)
+      label État :
+        input(type="text" name="catwayState" required)
+      button(type="submit") Modifier
+    #edit-result
+    h3 Supprimer un catway
+    form#deleteCatwayForm
+      label Numéro à supprimer :
+        select(name="catwayNumber" id="deleteCatwayNumberSelect" required)
+      button(type="submit") Supprimer
+    #deleteCatwayResult
+    h3 Réserver un catway
+    form#reservationForm
+      label Numéro du catway :
+        select(name="catwayNumber" id="reservationCatwayNumber" required)
+      label Date de début :
+        input(type="date" name="startDate" id="startDate" required)
+      label Date de fin :
+        input(type="date" name="endDate" id="endDate" required)
+      label Nom du bateau :
+        input(type="text" name="boatName" required)
+      label Nom et prénom :
+        input(type="text" name="fullName" required)
+      button(type="submit") Réserver
+    #reservationResult
+    script(src="/catways.js")

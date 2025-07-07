@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', () => {
     afficherCatways();
     remplirSelectCatwayNumbers();
@@ -7,8 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // recuperation des catways
- async function afficherCatways() {
-  const res = await fetch('/catways'); 
+async function afficherCatways() {
+  const res = await fetch('/api/catways');
   const catways = await res.json();
   console.log(catways);
   const tbody = document.querySelector('#catways-table tbody');
@@ -33,7 +32,7 @@ document.getElementById('addCatwayForm').onsubmit = async function(e) {
     const catwayType = this.catwayType.value;
     const catwayState = this.catwayState.value;
 
-    const res = await fetch('/catways', {
+    const res = await fetch('/api/catways', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ catwayType, catwayState})
@@ -44,6 +43,9 @@ document.getElementById('addCatwayForm').onsubmit = async function(e) {
         document.getElementById('catwayResult').innerText = `Catway ajouté ! Numéro attribué : ${data.catwayNumber}`;
         this.reset();
         await afficherCatways();
+        await remplirSelectCatwayNumbers();
+        await remplirSelectDeleteCatwayNumbers();
+        await remplirSelectReservationCatways();
     } else {
         document.getElementById('catway-result').innerText = 'Erreur : ' + (data.error || JSON.stringify(data));
     }
@@ -52,7 +54,7 @@ document.getElementById('addCatwayForm').onsubmit = async function(e) {
 //modification des catways
 // selection du numero de catway
 async function remplirSelectCatwayNumbers() {
-  const res = await fetch('/catways');
+  const res = await fetch('/api/catways');
   const catways = await res.json();
   const select = document.getElementById('catwayNumberSelect');
   select.innerHTML = '';
@@ -70,7 +72,7 @@ document.getElementById('editCatwayForm').onsubmit = async function(e) {
   const catwayNumber = this.catwayNumber.value;
   const catwayState = this.catwayState.value;
 
-  const res = await fetch(`/catways/${catwayNumber}`, {
+  const res = await fetch(`/api/catways/${catwayNumber}`, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ catwayState })
@@ -81,6 +83,8 @@ document.getElementById('editCatwayForm').onsubmit = async function(e) {
     alert('Catway modifié !');
     await afficherCatways();
     await remplirSelectCatwayNumbers();
+    await remplirSelectDeleteCatwayNumbers();
+    await remplirSelectReservationCatways();
     this.reset();
   } else {
     alert('Erreur : ' + (data.error || JSON.stringify(data)));
@@ -89,7 +93,7 @@ document.getElementById('editCatwayForm').onsubmit = async function(e) {
 
 // suppression des catways
 async function remplirSelectDeleteCatwayNumbers() {
-  const res = await fetch('/catways');
+  const res = await fetch('/api/catways');
   const catways = await res.json();
   const select = document.getElementById('deleteCatwayNumberSelect');
   select.innerHTML = '';
@@ -107,7 +111,7 @@ async function remplirSelectDeleteCatwayNumbers() {
 document.getElementById('deleteCatwayForm').onsubmit = async function(e) {
   e.preventDefault();
   const catwayNumber = this.catwayNumber.value;
-  const res = await fetch(`/catways/${catwayNumber}`, {
+  const res = await fetch(`/api/catways/${catwayNumber}`, {
     method: 'DELETE'
   });
   const data = await res.json();
@@ -115,6 +119,8 @@ document.getElementById('deleteCatwayForm').onsubmit = async function(e) {
     document.getElementById('deleteCatwayResult').innerText = 'Catway supprimé !';
     await remplirSelectDeleteCatwayNumbers();
     await afficherCatways();
+    await remplirSelectCatwayNumbers();
+    await remplirSelectReservationCatways();
     this.reset();
   } else {
     document.getElementById('deleteCatwayResult').innerText = 'Erreur : ' + (data.error || JSON.stringify(data));
@@ -124,7 +130,7 @@ document.getElementById('deleteCatwayForm').onsubmit = async function(e) {
 
 // reservations des catways
 async function remplirSelectReservationCatways() {
-  const res = await fetch('/catways');
+  const res = await fetch('/api/catways');
   const catways = await res.json();
   const select = document.getElementById('reservationCatwayNumber');
   select.innerHTML = '';
@@ -161,7 +167,7 @@ document.getElementById('reservationForm').onsubmit = async function(e) {
     return;
   }
 
-  const res = await fetch('/catways/reserve', {
+  const res = await fetch('/api/catways/reserve', {
     method: 'POST',
     headers: { 
       'Content-Type': 'application/json',
@@ -176,4 +182,12 @@ document.getElementById('reservationForm').onsubmit = async function(e) {
   } else {
     document.getElementById('reservationResult').innerText = data.error || "Erreur lors de la réservation.";
   }
+};
+
+document.getElementById('logout').onclick = async function(e) {
+  e.preventDefault();
+  await fetch('/logout');
+  localStorage.removeItem('token');
+  document.cookie = 'token=; Max-Age=0; path=/;';
+  window.location.href = '/';
 };

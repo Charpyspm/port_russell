@@ -12,7 +12,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if (data.token) {
       document.getElementById('result').innerText = 'Login successful! Token: ' + data.token;
       localStorage.setItem('token', data.token);
-      window.location.href = '/dashboard.html';
+      document.cookie = `token=${data.token}; path=/;`;
+      window.location = '/dashboard';
     } else {
       document.getElementById('result').innerText = 'login failed:' +data.message;
     }

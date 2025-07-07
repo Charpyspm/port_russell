@@ -3,7 +3,8 @@ document.getElementById('logout').onclick = async function(e) {
   e.preventDefault();
   await fetch('/logout');
   localStorage.removeItem('token');
-  window.location.href = 'index.html'; 
+  document.cookie = 'token=; Max-Age=0; path=/;';
+  window.location.href = '/'; 
 };
 
 
@@ -25,7 +26,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
 // envoie vers la page edit.html
 document.getElementById('edit-profile-btn').onclick = function() {
-  window.location.href = 'edit.html';
+  window.location.href = '/edit';
 };
 
 // Supression de l'utilisateur

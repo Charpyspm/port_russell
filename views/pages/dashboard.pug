@@ -1,0 +1,37 @@
+extends ../layout
+
+block content
+  header
+    h2 Dashboard
+    nav
+      ul
+        li: a(href="#", onclick="history.back(); return false;") Retour
+        li: a(href="../openapi.yaml", target="_blank") Documentation
+        li: a(href="/catways") Réserver un catway
+        li: a(href="#", id="logout") Se deconnecter
+        li: a(href="/register") Créer un nouvel utilisateur
+  main
+    hr
+    h2 Mon profil
+    p Nom d'utilisateur : #{user.username}
+    p Email : #{user.email}
+    p
+      button#edit-profile-btn Modifier
+      button#delete-profile-btn Supprimer
+    hr
+    p Date du jour : #{today}
+    hr
+    h2 Mes reservations
+    table#reservations-table(border="1")
+      thead
+        tr
+          th Catway
+          th Nom
+          th Nom du bateau
+          th Date de début
+          th Date de fin
+          th Statut
+          th Modifier
+          th Supprimer
+      tbody
+    script(src="/dashboard.js")
