@@ -1,0 +1,22 @@
+extends ../layout
+
+block content
+  header
+    h2 Dashboard
+    nav
+      ul
+        li: a(href="#", onclick="history.back(); return false;") Retour
+        li: a(href="../openapi.yaml", target="_blank") Documentation
+        li: a(href="/catways") Réserver un catway
+        li: a(href="#", id="logout") Se deconnecter
+  h1.center Modifier vos informations
+  form#editForm.center
+    label(for="username") Nom d'utilisateur:
+    input(type="text" id="username" name="username")
+    label(for="email") Email:
+    input(type="email" id="email" name="email")
+    label(for="password") Mot de passe:
+    input(type="password" id="password" name="password" autocomplete="current-password")
+    button(type="submit") Enregistrer
+  #result
+  script(src="/edit.js")

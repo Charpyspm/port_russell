@@ -16,4 +16,12 @@ document.addEventListener('DOMContentLoaded', function() {
       document.getElementById('result').innerText = 'Erreur : ' + (data.error || JSON.stringify(data));
     }
   };
+
+  document.getElementById('logout').onclick = async function(e) {
+    e.preventDefault();
+    await fetch('/logout');
+    localStorage.removeItem('token');
+    document.cookie = 'token=; Max-Age=0; path=/;';
+    window.location.href = '/';
+  };
 });

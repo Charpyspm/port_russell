@@ -1,0 +1,22 @@
+extends ../layout
+
+block content
+  h1.center Port Russell
+  p.center Bienvenue au Port de Plaisance !
+    br
+    | Profitez d’un emplacement idéal pour votre bateau et réservez facilement votre catway en ligne.
+    br
+    | Notre port vous accueille toute l’année dans un cadre sécurisé et convivial, avec des services adaptés à tous les plaisanciers.
+    br
+    | Naviguez l’esprit tranquille, votre place vous attend !
+  .center
+    form#loginForm.center(method="POST" action="/users/authenticate")
+      fieldset
+        legend Connexion
+        label(for="email") Email:
+        input(type="email" id="email" name="email" required)
+        label(for="password") Mot de passe:
+        input(type="password" id="password" name="password" autocomplete="current-password" required)
+        button(type="submit") Se connecter
+    #result
+    script(src="/login.js")
