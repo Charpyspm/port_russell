@@ -1,14 +1,13 @@
--Télécharger le fichier zip
--lancer la ligne de commande npx nodemon dans la console vs code
--Entrer l'URL: http://localhost:3000/ dans la barre de recherche du navigateur
+Port Russell
 
+Api permettant de gérer différents utilisateurs, catways (Réservations, modifications, suppréssion)
 
+Stack utilisée : 
 
-site port Russell
-  identifiant: john@xxx.com
-  mot de passe: 123456
-
-
-identifiant compte mongoDb/Postman:
-  identifiant: devoir.port.russell@gmail.com
-  mot de passe: Devoir1cef
+  -Node.js -> 22.14.0
+  -Express.js -> 4.21.2 
+  -mongoose -> 8.15.2
+  -nodemon -> 3.1.10
+  -pug -> 3.0.3
+  -MangoDB -> base de donnée
+  -OnRender -> Hébergement du site
